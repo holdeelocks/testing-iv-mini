@@ -21,6 +21,24 @@ describe('server.js', () => {
 			expect(response.body).toEqual(expected);
 		});
 	});
+
+	describe('POST /greet endpoint', () => {
+		it('should return 400 status code', async () => {
+			// const body = { firstName: 'Stephen', lastName: 'Bondor' };
+
+			let response = await request(server)
+				.post('/greet')
+				.send({ firstName: 'Frodog' });
+
+			expect(response.status).toBe(400);
+
+			reponse = await request(server)
+				.post('/greet')
+				.send({ lastName: 'Baggins' });
+
+			expect(response.status).toBe(400);
+		});
+	});
 });
 // what do we care about, we expect json format
 // what status code
